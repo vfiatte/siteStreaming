@@ -3,13 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forum.service;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 
 /**
  *
  * @author admin
  */
-public interface DataService {
-
-    public void deleteAll();
+public class TestInterface {
+    
+    public TestInterface() {
+    }
+    
 }
