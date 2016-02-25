@@ -24,3 +24,4 @@ public interface ForumService {
 
     public Forum rechercherParId(long id);
 }
+

@@ -24,3 +24,4 @@ public interface MessageService {
 
     public void modifier(Message m);
 }
+

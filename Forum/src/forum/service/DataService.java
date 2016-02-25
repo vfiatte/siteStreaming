@@ -13,3 +13,4 @@ public interface DataService {
 
     public void deleteAll();
 }
+

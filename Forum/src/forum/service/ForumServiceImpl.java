@@ -39,3 +39,4 @@ public class ForumServiceImpl implements ForumService{
         return dao.rechercherParId(id);
     }
 }
+
