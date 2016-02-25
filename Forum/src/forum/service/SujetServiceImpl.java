@@ -6,6 +6,7 @@
 package forum.service;
 
 import forum.dao.SujetDAO;
+import forum.dao.SujetDAOjpaImpl;
 import forum.entity.Sujet;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class SujetServiceImpl implements SujetService {
 
     @Autowired
-    private SujetDAO dao;
+    private SujetDAOjpaImpl dao;
 
     public void ajouter(Sujet s) {
         dao.ajouter(s);

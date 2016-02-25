@@ -8,6 +8,7 @@ package forum.service;
 import forum.Exception.MotDePasseIncorrectException;
 import forum.Exception.UtilisateurDejaExistantException;
 import forum.dao.UtilisateurDAO;
+import forum.dao.UtilisateurDAOjpaImpl;
 import forum.entity.Utilisateur;
 import forum.enumeration.TypeUtil;
 import java.util.List;
@@ -25,7 +26,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private MailServiceImpl ms;
 
     @Autowired
-    private UtilisateurDAO dao;
+    private UtilisateurDAOjpaImpl dao;
 
     public List<Utilisateur> listerTous() {
         return dao.listerTous();

@@ -6,6 +6,7 @@
 package forum.service;
 
 import forum.dao.MessageDAO;
+import forum.dao.MessageDAOjpaImpl;
 import forum.entity.Message;
 import forum.entity.Sujet;
 import java.util.List;
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Service;
 public class MessageServiceImpl implements MessageService {
 
     @Autowired
-    private MessageDAO dao;
+    private MessageDAOjpaImpl dao;
 
     public void ajouter(Message m) {
         dao.ajouter(m);
