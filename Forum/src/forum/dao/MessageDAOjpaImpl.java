@@ -10,12 +10,13 @@ import forum.entity.Sujet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author admin
  */
-
+@Repository
 public class MessageDAOjpaImpl implements MessageDAO{
 
     @Override

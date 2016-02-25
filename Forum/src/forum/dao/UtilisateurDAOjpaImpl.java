@@ -9,11 +9,13 @@ import forum.entity.Utilisateur;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author admin
  */
+@Repository
 public class UtilisateurDAOjpaImpl implements UtilisateurDAO{
 
     @Override
