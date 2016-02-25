@@ -11,6 +11,8 @@ import forum.dao.UtilisateurDAO;
 import forum.entity.Utilisateur;
 import forum.enumeration.TypeUtil;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *

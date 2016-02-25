@@ -8,6 +8,8 @@ package forum.service;
 import forum.dao.SujetDAO;
 import forum.entity.Sujet;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *

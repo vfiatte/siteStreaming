@@ -5,6 +5,8 @@
  */
 package forum.service;
 
+import org.springframework.stereotype.Service;
+
 /**
  *
  * @author admin

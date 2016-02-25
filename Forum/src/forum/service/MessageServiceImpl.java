@@ -9,6 +9,8 @@ import forum.dao.MessageDAO;
 import forum.entity.Message;
 import forum.entity.Sujet;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *

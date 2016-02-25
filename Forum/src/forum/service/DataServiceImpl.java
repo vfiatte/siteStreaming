@@ -8,6 +8,7 @@ package forum.service;
 import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import org.springframework.stereotype.Service;
 
 /**
  *
