@@ -14,49 +14,20 @@ import javax.persistence.Persistence;
  *
  * @author admin
  */
-public class UtilisateurDAO {
+public interface UtilisateurDAO {
+    public List<Utilisateur> listerTous();
 
-    public List<Utilisateur> listerTous() {
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        return em.createQuery("SELECT u FROM Utilisateur u").getResultList();
-    }
+    public Utilisateur rechercherParId(long id);
 
-    public Utilisateur rechercherParId(long id) {
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        return em.find(Utilisateur.class, id);
-    }
+    public void modifier(Utilisateur u);
 
-    public void modifier(Utilisateur u) {
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        em.getTransaction().begin();
-        em.merge(u);
-        em.getTransaction().commit();
-    }
+    public void supprimer(long id);
 
-    public void supprimer(long id) {
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        em.getTransaction().begin();
-        em.createQuery("DELETE FROM Utilisateur u WHERE u.id = " + id).executeUpdate();
-        em.getTransaction().commit();
-    }
+    public void ajouter(Utilisateur u);
 
-    public void ajouter(Utilisateur u) {
+    public Utilisateur rechercheParLogin(String login);
+   
 
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        em.getTransaction().begin();
-        em.persist(u);
-        em.getTransaction().commit();
+    public Utilisateur rechercheParMail(String email);
 
-    }
-
-    public Utilisateur rechercheParLogin(String login) {
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        return (Utilisateur) em.createQuery("SELECT u FROM Utilisateur u WHERE u.login ='" + login+"'").getSingleResult();
-
-    }
-
-    public Utilisateur rechercheParMail(String email) {
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        return (Utilisateur) em.createQuery("SELECT u FROM Utilisateur u WHERE u.email ='" + email+"'").getSingleResult();
-    }
 }

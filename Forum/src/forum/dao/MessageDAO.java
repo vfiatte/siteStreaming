@@ -5,48 +5,26 @@
  */
 package forum.dao;
 
+import forum.entity.Forum;
 import forum.entity.Message;
-import forum.entity.Sujet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author admin
  */
-public class MessageDAO {
+public interface MessageDAO {
 
-    public void supprimer(long id) {
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        em.getTransaction().begin();
-        em.createQuery("DELETE FROM Message m WHERE m.id = " + id).executeUpdate();
-        em.getTransaction().commit();
-    }
+    public void supprimer(long id);
 
-    public void ajouter(Message m) {
+    public void ajouter(Message m);
 
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        em.getTransaction().begin();
-        em.persist(m);
-        em.getTransaction().commit();
+    public List<Message> listerTous();
 
-    }
-
-    public List<Message> listerTous() {
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        return em.createQuery("SELECT m FROM Message m").getResultList();
-    }
-
-    public Message rechercherParId(long id) {
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        return em.find(Message.class, id);
-    }
+    public Message rechercherParId(long id);
     
-    public void modifier(Message m){
-        EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
-        em.getTransaction().begin();
-        em.merge(m);
-        em.getTransaction().commit();
-    }
+    public void modifier(Message m);
 }
