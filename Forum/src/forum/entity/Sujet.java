@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,70 +31,52 @@ public class Sujet implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String titre;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateCreation;
+    
+    @OneToMany(mappedBy = "duSujet", cascade = CascadeType.PERSIST)
+    private List<Message> messagesCrees = new ArrayList<Message>();
     
     @ManyToOne
     @JoinColumn(name = "UTIL_ID")
-    private Utilisateur poster;
+    private  Utilisateur posterPar;
     
     @ManyToOne
     @JoinColumn(name = "FORUM_ID")
-    private Forum Forum_Sujet;//Sujet x appartenant au forum y
-    
-    @OneToMany(mappedBy = "Sujet_Message")
-    private List<Message> MessageDeSujet = new ArrayList<Message>();
-
-    public Sujet(Long id, String titre, Date dateCreation, Utilisateur poster, Forum Forum_Sujet) {
-        this.id = id;
-        this.titre = titre;
-        this.dateCreation = dateCreation;
-        this.poster = poster;
-        this.Forum_Sujet = Forum_Sujet;
-    }
-
-
-    public Sujet(){
-        
-    }
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Utilisateur getPoster() {
-        return poster;
-    }
-
-    public void setPoster(Utilisateur poster) {
-        this.poster = poster;
-    }
-
-    public Forum getForum_Sujet() {
-        return Forum_Sujet;
-    }
-
-    public void setForum_Sujet(Forum Forum_Sujet) {
-        this.Forum_Sujet = Forum_Sujet;
-    }
-
-    public List<Message> getMessageDeSujet() {
-        return MessageDeSujet;
-    }
-
-    public void setMessageDeSujet(List<Message> MessageDeSujet) {
-        this.MessageDeSujet = MessageDeSujet;
-    }
-    
-    
+    private  Forum duForum;
 
     public String getTitre() {
         return titre;
     }
+
+    public List<Message> getMessagesCrees() {
+        return messagesCrees;
+    }
+
+    public void setMessagesCrees(List<Message> messagesCrees) {
+        this.messagesCrees = messagesCrees;
+    }
+
+    
+    
+    public Utilisateur getPosterPar() {
+        return posterPar;
+    }
+
+    public void setPosterPar(Utilisateur posterPar) {
+        this.posterPar = posterPar;
+    }
+
+    public Forum getDuForum() {
+        return duForum;
+    }
+
+    public void setDuForum(Forum duForum) {
+        this.duForum = duForum;
+    }
+    
+    
 
     public void setTitre(String titre) {
         this.titre = titre;
@@ -106,8 +89,14 @@ public class Sujet implements Serializable {
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
     }
-    
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public int hashCode() {

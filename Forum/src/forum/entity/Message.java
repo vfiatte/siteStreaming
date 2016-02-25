@@ -30,25 +30,17 @@ public class Message implements Serializable {
     private String contenu;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateCreation;
-
     
     @ManyToOne
     @JoinColumn(name = "UTIL_ID")
-    private Utilisateur posterPar;
+    private  Utilisateur posterPar;
     
     @ManyToOne
     @JoinColumn(name = "SUJET_ID")
-    private Forum Sujet_Message;
-    
-    public Message(){
-        
-    }
-    
-    public Message(Long id, String titre, String contenu, Date dateCreation) {
-        this.id = id;
-        this.titre = titre;
-        this.contenu = contenu;
-        this.dateCreation = dateCreation;
+    private  Sujet duSujet;
+
+    public String getTitre() {
+        return titre;
     }
 
     public Utilisateur getPosterPar() {
@@ -59,30 +51,15 @@ public class Message implements Serializable {
         this.posterPar = posterPar;
     }
 
-    public Forum getSujet_Message() {
-        return Sujet_Message;
+    public Sujet getDuSujet() {
+        return duSujet;
     }
 
-    public void setSujet_Message(Forum Sujet_Message) {
-        this.Sujet_Message = Sujet_Message;
+    public void setDuSujet(Sujet duSujet) {
+        this.duSujet = duSujet;
     }
     
     
-    
-
-    
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitre() {
-        return titre;
-    }
 
     public void setTitre(String titre) {
         this.titre = titre;
@@ -104,7 +81,14 @@ public class Message implements Serializable {
         this.dateCreation = dateCreation;
     }
     
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public int hashCode() {

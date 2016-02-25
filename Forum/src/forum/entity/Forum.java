@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
@@ -32,38 +33,19 @@ public class Forum implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String titre;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    
+    
+    @Temporal(TemporalType.DATE)
     private Date dateCreation;
     
+    @OneToMany(mappedBy = "duForum", cascade = CascadeType.PERSIST)
+    private List<Sujet> sujetsCrees = new ArrayList<Sujet>();
+    
     @ManyToOne
+  //  @ManyToOne(cascade = CascadeType.REMOVE)
+   // @CascadeOnDelete
     @JoinColumn(name = "UTIL_ID")
-    private Utilisateur createur; 
-    
-    @OneToMany(mappedBy = "Forum_Sujet")
-    private List<Sujet> SujetDeForum = new ArrayList<Sujet>();
-
-    public Forum(){
-        
-    }
-    
-    
-    
-    public Forum(Long id, String titre, Date dateCreation) {
-        this.id = id;
-        this.titre = titre;
-        this.dateCreation = dateCreation;
-        this.createur = createur;
-    }
-
-    public List<Sujet> getSujetDeForum() {
-        return SujetDeForum;
-    }
-
-    public void setSujetDeForum(List<Sujet> SujetDeForum) {
-        this.SujetDeForum = SujetDeForum;
-    }
-    
-    
+    private  Utilisateur createur;
 
     public Utilisateur getCreateur() {
         return createur;
@@ -72,17 +54,8 @@ public class Forum implements Serializable {
     public void setCreateur(Utilisateur createur) {
         this.createur = createur;
     }
-
     
     
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getTitre() {
         return titre;
     }
@@ -95,13 +68,29 @@ public class Forum implements Serializable {
         return dateCreation;
     }
 
+    public List<Sujet> getSujetsCrees() {
+        return sujetsCrees;
+    }
+
+    public void setSujetsCrees(List<Sujet> sujetsCrees) {
+        this.sujetsCrees = sujetsCrees;
+    }
+    
+    
+
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
     }
-    
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     
-   
 
     @Override
     public int hashCode() {
@@ -125,11 +114,7 @@ public class Forum implements Serializable {
 
     @Override
     public String toString() {
-        return "Le Forum " + titre;
-    }
-
-    public void setCreateur(String ccc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "forum.entity.Forum[ id=" + id + " ]";
     }
     
 }

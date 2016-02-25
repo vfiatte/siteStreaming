@@ -10,7 +10,7 @@ import forum.Exception.UtilisateurDejaExistantException;
 import forum.dao.UtilisateurDAO;
 import forum.dao.UtilisateurDAOjpaImpl;
 import forum.entity.Utilisateur;
-import forum.enumeration.TypeUtil;
+import forum.enumeration.TypeUtilisateur;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +36,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         return dao.rechercherParId(id);
     }
 
+    @Override
     public void ajouter(Utilisateur u) {
         dao.ajouter(u);
     }
@@ -63,7 +64,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 //            u.equals(dao.rechercheParLogin(u.getLogin()));
         } catch (Exception e) {
             ms.Mail("admin", u.getEmail(), "", "");
-            u.setType(TypeUtil.NONVALIDE);
+            u.setTypeUtil(TypeUtilisateur.NONVALIDE);
             dao.ajouter(u);
             dao.modifier(u);
             System.out.println("Utilisateur créé");
@@ -77,7 +78,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     public void validationInscription(Utilisateur u) {
         ms.Click();
-        u.setType(TypeUtil.UTILISATEUR);
+        u.setTypeUtil(TypeUtilisateur.UTILISATEUR);
         dao.modifier(u);
     }
 

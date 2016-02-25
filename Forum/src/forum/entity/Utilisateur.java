@@ -5,15 +5,21 @@
  */
 package forum.entity;
 
-import forum.enumeration.TypeUtil;
+import forum.enumeration.TypeUtilisateur;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
  *
@@ -29,70 +35,70 @@ public class Utilisateur implements Serializable {
     private String login;
     private String mdp;
     private String email;
-    private TypeUtil typeuser;
+    private boolean inscrit=false;
     
-    @OneToMany(mappedBy = "createur")
-    private List<Forum> forumCrees = new ArrayList<Forum>(); //Defintion de l'association bidirectionnelle
+    @OneToMany(mappedBy = "posterPar", cascade = CascadeType.PERSIST )
+    private List<Sujet> sujetsCrees = new ArrayList<Sujet>();
     
-    @OneToMany(mappedBy ="poster" )
-    private List<Sujet> sujetCrees = new ArrayList<Sujet>();
+    @OneToMany(mappedBy = "posterPar", cascade =  CascadeType.PERSIST)
+    private List<Message> messagesCrees = new ArrayList<Message>();
     
-    @OneToMany(mappedBy = "posterPar")
-    private List<Message> messageCrees = new ArrayList<Message>();
-    
-    
-    public Utilisateur (){
-        
+    @OneToMany(mappedBy = "createur", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @CascadeOnDelete
+    private List<Forum> forumsCrees = new ArrayList<Forum>();
+
+    public Utilisateur() {
     }
-    public Utilisateur(Long id, String login, String mdp, String email, TypeUtil type) {
+
+    
+    
+    
+    public Utilisateur(Long id, String login, String mdp, String email, TypeUtilisateur typeUtil) {
         this.id = id;
         this.login = login;
         this.mdp = mdp;
         this.email = email;
-        this.typeuser = type;
-    }
-
-    public TypeUtil getTypeuser() {
-        return typeuser;
-    }
-
-    public void setTypeuser(TypeUtil typeuser) {
-        this.typeuser = typeuser;
-    }
-
-    public List<Forum> getForumCrees() {
-        return forumCrees;
-    }
-
-    public void setForumCrees(List<Forum> forumCrees) {
-        this.forumCrees = forumCrees;
-    }
-
-    public List<Sujet> getSujetCrees() {
-        return sujetCrees;
-    }
-
-    public void setSujetCrees(List<Sujet> sujetCrees) {
-        this.sujetCrees = sujetCrees;
-    }
-
-    public List<Message> getMessageCrees() {
-        return messageCrees;
-    }
-
-    public void setMessageCrees(List<Message> messageCrees) {
-        this.messageCrees = messageCrees;
+        this.typeUtil = typeUtil;
     }
     
-   
+    
 
-    public Long getId() {
-        return id;
+    public List<Forum> getForumsCrees() {
+        return forumsCrees;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setForumsCrees(List<Forum> forumsCrees) {
+        this.forumsCrees = forumsCrees;
     }
+
+    public boolean isInscrit() {
+        return inscrit;
+    }
+
+    public List<Sujet> getSujetsCrees() {
+        return sujetsCrees;
+    }
+
+    public void setSujetsCrees(List<Sujet> sujetsCrees) {
+        this.sujetsCrees = sujetsCrees;
+    }
+
+    public List<Message> getMessagesCrees() {
+        return messagesCrees;
+    }
+
+    public void setMessagesCrees(List<Message> messagesCrees) {
+        this.messagesCrees = messagesCrees;
+    }
+    
+
+    public void setInscrit(boolean inscrit) {
+        this.inscrit = inscrit;
+    }
+    
+    
+    @Enumerated(EnumType.STRING)
+    private TypeUtilisateur typeUtil;
 
     public String getLogin() {
         return login;
@@ -118,15 +124,21 @@ public class Utilisateur implements Serializable {
         this.email = email;
     }
 
-    public TypeUtil getType() {
-        return typeuser;
+    public TypeUtilisateur getTypeUtil() {
+        return typeUtil;
     }
 
-    public void setType(TypeUtil type) {
-        this.typeuser = type;
+    public void setTypeUtil(TypeUtilisateur typeUtil) {
+        this.typeUtil = typeUtil;
     }
-    
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public int hashCode() {
@@ -138,17 +150,14 @@ public class Utilisateur implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-//        if (!(object instanceof Utilisateur)) {
-//            return false;
-//        }
-//        Utilisateur other = (Utilisateur) object;
-//        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-//            return false;
-//        }
-//        return true;
-Utilisateur u1 = (Utilisateur) object;
-
-return this.getId().equals(u1.getId()) || this.getEmail().equals(u1.getEmail()) || this.getLogin().equals(u1.getLogin());
+        if (!(object instanceof Utilisateur)) {
+            return false;
+        }
+        Utilisateur other = (Utilisateur) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
     @Override

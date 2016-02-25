@@ -48,8 +48,9 @@ public class UtilisateurDAOjpaImpl implements UtilisateurDAO{
 
     @Override
     public void ajouter(Utilisateur u) {
-
+        System.out.println("1");
         EntityManager em = Persistence.createEntityManagerFactory("ForumPU").createEntityManager();
+        System.out.println("2");
         em.getTransaction().begin();
         em.persist(u);
         em.getTransaction().commit();
