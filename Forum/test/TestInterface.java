@@ -44,8 +44,8 @@ public class TestInterface {
 //        Message m = new Message(4L, "IPHONE", "Mon iphone est cassé aidez moi", new Date());
 //        ms.ajouter(m);
     Utilisateur u = new Utilisateur(1L, "FFF", "EEE", "RRR", TypeUtilisateur.MODERATEUR);
-    us.ajouter(u);
-        
+    us.ajouter(u);  
+           
     }
 
 }

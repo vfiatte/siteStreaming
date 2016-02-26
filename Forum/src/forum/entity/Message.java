@@ -42,7 +42,7 @@ public class Message implements Serializable {
     public String getTitre() {
         return titre;
     }
-
+ 
     public Utilisateur getPosterPar() {
         return posterPar;
     }
@@ -58,7 +58,6 @@ public class Message implements Serializable {
     public void setDuSujet(Sujet duSujet) {
         this.duSujet = duSujet;
     }
-    
     
 
     public void setTitre(String titre) {
